@@ -17,4 +17,7 @@ def point_recommendation_result(request, *args, **kwargs):
   
 def fish_information(request, *args, **kwargs):
   return render(request, 'noviceAngler/fish_information.html')
+
+def find_fish(request, *args, **kwargs):
+  return render(request, 'noviceAngler/find_fish.html')
   

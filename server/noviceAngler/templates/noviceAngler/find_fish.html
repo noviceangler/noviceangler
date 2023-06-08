@@ -1,0 +1,16 @@
+{% extends 'noviceAngler/base.html' %}
+{% load static %}
+{% block content %}
+<main class="findfish_main">
+  <div class="findfish_image">
+    <img src="{% static 'images/find_fish.png' %}" alt="">
+  </div>
+  <div class="findfish_textbox">
+    <h1 class="point_title">물고기 찾기</h1>
+    <p class="point_text1">잡은 물고기 종류가 궁금할 때 찾아주세요!</p>
+    <p class="point_text2">사진 검색을 통해 여러분이 잡은 물고기의 사진을 넣어주세요.</p>
+    <p class="point_text2">해당 물고기가 어떤 종류인지 찾아드립니다.</p>
+    <a href="{% url 'noviceAngler:point_recommendation_question' %}" class="start_point">시작하기</a>
+  </div>
+</main>
+{% endblock %}

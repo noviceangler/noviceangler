@@ -1,0 +1,17 @@
+.findfish_main {
+  position: absolute;
+  top: 70px;
+  bottom: 100px;
+  width: 100%;
+  padding: 0 250px;
+  display: flex;
+  align-items: center;
+}
+.findfish_image {
+  width: 455px;
+  height: 455px;
+  margin-right: 50px;
+}
+.findfish_textbox {
+  color: #486284;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/base_styles.css' %}">
+  <link rel="stylesheet" href="{% static 'css/find_fish_styles.css' %}">
+  <link rel="stylesheet" href="{% static 'css/point_recommendation_styles.css' %}">
+  <link rel="stylesheet" href="{% static 'css/point_recommendation_question_styles.css' %}">
+  <link rel="stylesheet" href="{% static 'css/point_recommendation_result_styles.css' %}">
+  <title>Document</title>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <a href="{% url 'noviceAngler:main_page' %}">
+        <img src="{% static 'images/logo_small.png' %}" alt="">
+      </a>
+    </div>
+    <div class="menu">
+      <ul>
+        <li><a href="{% url 'noviceAngler:point_recommendation' %}">낚시 포인트 추천</a></li>
+        <li><a href="{% url 'noviceAngler:find_fish' %}">수산물 찾기</a></li>
+        <li><a href="">커뮤니티</a></li>
+        <li><a href=""><img src="{% static 'images/user_profile.png' %}" alt=""></a></li>
+      </ul>
+    </div>
+  </nav>
+  {% block content %}
+  {% endblock %}
+  <footer class="footer">
+    <div class="logo">
+      <a href="{% url 'noviceAngler:main_page' %}">
+        <img src="{% static 'images/logo_small.png' %}" alt="">
+      </a>
+    </div>
+    <p class="footer_text">우연히 낚시를 시작하게 된 여러분을 위한 서비스</p>
+  </footer>
+</body>
+</html>
