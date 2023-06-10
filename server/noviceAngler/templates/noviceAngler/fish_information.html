@@ -1,0 +1,32 @@
+{% extends 'noviceAngler/base.html' %}
+{% load static %}
+{% block content %}
+<main class="fish_info_main">
+  <div class="fish_image">
+    <img src="{% static 'images/fish.png' %}" alt="">
+    <a class="goback_btn" href="javascript:history.go(1)">돌아가기</a>
+  </div>
+  <div class="fish_info">
+    <div class="fish_name">
+      <img src="{% static 'images/black_fish.png' %}" alt="">
+      <span style="font-size: 50px; font-weight: bold">참돔</span>
+      <span class="fish_period">1월 ~ 12월</span>
+      <span class="fish_period">(오전 6시 ~ 정오 12시)</span>
+    </div>
+    <div class="fishing_ways">
+      <p class="title">낚시 방법</p>
+    </div>
+    <div class="main_point">
+      <p class="title">주요 낚시 포인트</p>
+      <div class="normal_text">부산, 거제, 통영, 여수 </div>
+    </div>
+    <div class="notice">
+      <p class="title">유의점</p>
+      <ul class="notice_detail">
+        <li>산란기가 5월이지만 서식지가 다양하여 딱히 정해진 금어기는 없다.</li>
+        <li>체장 24cm 이하로는 포획이 금지되어 있다.</li>
+      </ul>
+    </div>
+  </div>
+</main>
+{% endblock %}

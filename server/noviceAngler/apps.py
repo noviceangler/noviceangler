@@ -1,4 +1,5 @@
 from django.apps import AppConfig
+# from .image_classify import CNN
 
 
 class NoviceanglerConfig(AppConfig):

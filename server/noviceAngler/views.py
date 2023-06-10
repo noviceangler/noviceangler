@@ -1,5 +1,6 @@
 from django.shortcuts import render
-
+from .image_classify import load_model, image_processing
+from PIL import Image
 # Create your views here.
 
 
@@ -23,10 +24,22 @@ def find_fish_page(request, *args, **kwargs):
 
 def find_fish(request):
   if request.method == "POST":
-    user_image = request.FILES['photo']
-    print(user_image)
+    model = load_model()
+    uploaded_image = request.FILES['photo']
+    image = Image.open(uploaded_image)
+    preprocessed_image = image_processing(image)
+    predictions = model.predict(preprocessed_image)
+    fish_dict = {
+      0: '갈치',
+      1: '고등어',
+      2: '숭어',
+      3: '광어',
+      4: '우럭',
+      5: '참돔'
+      }
+    predicted_fish = fish_dict[predictions]
     return redirect("/")
-  return render(request, "noviceAngler/point_recommendation_result.html")
+  return render(request, "noviceAngler/point_recommendation_result.html", {'fish': predicted_fish})
 
   
   
