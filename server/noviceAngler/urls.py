@@ -10,4 +10,5 @@ urlpatterns = [
   path("point_recommendation/result/", views.point_recommendation_result, name="point_recommendation_result"),
   path("find_fish/", views.find_fish, name="find_fish"),
   path("fish_information/", views.fish_information, name="fish_information"),
+  path("point_result/", views.point_result, name="point_result"),
 ]
