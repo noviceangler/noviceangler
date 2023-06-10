@@ -18,8 +18,19 @@ def point_recommendation_result(request, *args, **kwargs):
 def fish_information(request, *args, **kwargs):
   return render(request, 'noviceAngler/fish_information.html')
 
-def find_fish(request, *args, **kwargs):
+def find_fish_page(request, *args, **kwargs):
   return render(request, 'noviceAngler/find_fish.html')
+
+def find_fish(request):
+  if request.method == "POST":
+    user_image = request.FILES['photo']
+    print(user_image)
+    return redirect("/")
+  return render(request, "noviceAngler/point_recommendation_result.html")
+
+  
+  
+  
   
 # def point_result(request, *args, **kwargs):
   if request.method == "POST":
