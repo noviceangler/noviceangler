@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base_styles.css' %}">
+  <title>어쩌다어부</title>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+        <img src="{% static 'images/logo_small.png' %}" alt="">
+      </a>
+    </div>
+    <div class="menu">
+      <ul>
+        <li><a href="">낚시 포인트 추천</a></li>
+        <li><a href="">물고기 찾기</a></li>
+        <li><a href="{% url 'noviceAngler:index' %}">커뮤니티</a></li>
+        {% if user.is_authenticated %}
+            <li><a class="nav-link" href="{% url 'common:logout' %}">{{ user.username }} (로그아웃)</a></li>
+        {% else %}
+            <li><a href="{% url 'common:login' %}">로그인</a></li>
+        {% endif %}
+        {% if not user.is_authenticated %}
+            <li><a href="{% url 'common:signup' %}">회원가입</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+  {% block content %}
+  {% endblock %}
+  <footer class="footer">
+    <div class="logo">
+        <img src="{% static 'images/logo_small.png' %}" alt="">
+    </div>
+    <p class="footer_text">우연히 낚시를 시작하게 된 여러분을 위한 서비스</p>
+  </footer>
+{% block script %}
+{% endblock %}
+</body>
+</html>
