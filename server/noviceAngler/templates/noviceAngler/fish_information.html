@@ -10,13 +10,11 @@
     <div class="fish_name">
       <img src="{% static 'images/black_fish.png' %}" alt="">
       <span style="font-size: 50px; font-weight: bold">{{fish.fish_name}}</span>
-      <span class="fish_period">{{fish}}</span>
+      <span class="fish_period">{{fish.season}}</span>
     </div>
     <div class="fishing_ways">
       <p class="title">낚시 방법</p>
-      <div class="normal_text">{{fish.float_fishing}}</div>
-      <div class="normal_text">{{fish.lure_fishing}}</div>
-      <div class="normal_text">{{fish.onetwo_fishing}}</div>
+      <div class="normal_text">{{fish.fishing_ways}}</div>
     </div>
     <div class="main_point">
       <p class="title">주요 낚시 포인트</p>
