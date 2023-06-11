@@ -5,12 +5,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
 from django.conf import settings
-
+from .image_classify import load_model, image_processing, resize_image
 from .models import Fish, Article, Comment, UserSubmission
 from .forms import ArticleForm, CommentForm
-
+from PIL import Image
+import numpy as np
 import pandas as pd
 import os
+import tensorflow as tf
 
 def main_page(request, *args, **kwargs):
     return render(request, 'noviceAngler/main_page.html')
@@ -157,25 +159,38 @@ def fish_information(request, pk, *args, **kwargs):
 
 def find_fish_page(request, *args, **kwargs):
     return render(request, 'noviceAngler/find_fish.html')
-
-def find_fish(request):
+# def find_fish(request):
     if request.method == "POST":
         model = load_model()
+        uploaded_image = request.FILES.get('photo')
+        if uploaded_image:
+            image = Image.open(uploaded_image)
+            preprocessed_image = image_processing(image)
+            prediction = model.predict(preprocessed_image)
+            predicted_class_index = np.argmax(prediction)
+            fish_classes = ['갈치', '고등어', '숭어', '광어', '우럭', '참돔']
+            predicted_class = fish_classes[predicted_class_index]
+
+            return render(request, "noviceAngler/fish_information.html", {'fish': predicted_class})
+    
+    return render(request, "noviceAngler/fish_information.html")
+def find_fish(request):
+    predicted_class = None
+    print(request.method, request.FILES['photo'])
+    if request.method == "POST" and request.FILES['photo']:
+        model = load_model()
         uploaded_image = request.FILES['photo']
-        image = Image.open(uploaded_image)
-        preprocessed_image = image_processing(image)
-        predictions = model.predict(preprocessed_image)
-        fish_dict = {
-        0: '갈치',
-        1: '고등어',
-        2: '숭어',
-        3: '광어',
-        4: '우럭',
-        5: '참돔'
-        }
-        predicted_fish = fish_dict[predictions]
-        return redirect("/")
-    return render(request, "noviceAngler/point_recommendation_result.html", {'fish': predicted_fish})
+        img = Image.open(uploaded_image)
+        img = img.resize((100, 100))
+        img = np.array(img)
+        img = img / 255.0
+        img = np.expand_dims(img, axis=0)
+        prediction = model.predict(img)
+        predicted_class_index = np.argmax(prediction)
+        fish_classes = ['갈치', '고등어', '숭어', '광어', '우럭', '참돔']
+        predicted_class = fish_classes[predicted_class_index]
+    return render(request, "noviceAngler/fish_information.html", {'fish': predicted_class})
+        
 
 # 게시판
 def community(request):

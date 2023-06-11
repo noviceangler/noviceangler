@@ -23,7 +23,6 @@
     <p>해당하는 추천 낚시 포인트가 없습니다.</p>
   {% endif %}
   <div>
-    
     <div class="title_text"><img src="{% static 'images/fish.png' %}" alt="">주로 잡히는 물고기</div>
     <div class="result_information">
       <a href="{% url 'noviceAngler:fish_information' %}" class="result_image">
@@ -42,7 +41,5 @@
     <div>결과가 마음에 드시나요?</div>
     <a class="research_btn" href="{% url 'noviceAngler:point_recommendation_question'%}">다시 검색하기</a>
   </div>
-<main class="rc_result_main">
-  
 </main>
 {% endblock %}

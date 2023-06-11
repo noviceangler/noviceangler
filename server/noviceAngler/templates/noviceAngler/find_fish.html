@@ -10,7 +10,7 @@
           <i class="fas fa-times"></i>
         </div>
       </div>
-      <form class="modal_content" action="{% url 'noviceAngler:find_fish' %}" enctype="multipart/form-data">
+      <form class="modal_content" action="{% url 'noviceAngler:find_fish' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="modal_buttons">
           <input class="upload-name" value="파일선택" disabled="disabled">

@@ -1,5 +1,4 @@
 .point_main {
-<<<<<<< HEAD
   position: absolute;
   top: 70px;
   bottom: 100px;
@@ -43,48 +42,3 @@
 .start_point:hover {
   border-color: #7B95B7;
 }
-=======
-    position: absolute;
-    top: 70px;
-    bottom: 100px;
-    width: 100%;
-    padding: 0 250px;
-    display: flex;
-    align-items: center;
-  }
-  .point_image {
-    width: 455px;
-    height: 455px;
-    margin-right: 50px;
-  }
-  .point_textbox {
-    color: #486284;
-  }
-  .point_title {
-    font-size: 60px;
-    margin: 0.5rem 0;
-  }
-  .point_text1 {
-    font-size: 25px;
-    margin: 0.5rem 0;
-  }
-  .point_text2 {
-    font-size: 20px;
-    color: #8CA2C0;
-    margin: 0.5rem 0;
-  }
-  .start_point {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100px;
-    height: 50px;
-    color: #486284;
-    border: 2px solid #486284;
-    border-radius: 50px;
-    font-weight: bold;
-  }
-  .start_point:hover {
-    border-color: #7B95B7;
-  }
->>>>>>> ca801c40e7fdbcc166bbe0ca2f8b6db441b21638

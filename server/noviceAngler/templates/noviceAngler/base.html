@@ -18,9 +18,9 @@
 </head>
 <body>
   <nav class="navbar">
-    <div class="logo">
+    <a href="{% url 'noviceAngler:main_page' %}" class="logo">
         <img src="{% static 'images/logo_small.png' %}" alt="">
-    </div>
+    </a>
     <div class="menu">
       <ul>
         <li><a href="{% url 'noviceAngler:point_recommendation' %}">낚시 포인트 추천</a></li>
