@@ -5,12 +5,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
 from django.conf import settings
-
+from .image_classify import load_model, image_processing, resize_image
 from .models import Fish, Article, Comment, UserSubmission
 from .forms import ArticleForm, CommentForm
-
+from PIL import Image
+import numpy as np
 import pandas as pd
 import os
+import tensorflow as tf
 
 def main_page(request, *args, **kwargs):
     return render(request, 'noviceAngler/main_page.html')
@@ -36,7 +38,7 @@ def point_recommendation_question(request, *args, **kwargs):
 
 # 낚시 포인트 추천 코드
 def find_recommendation_point(preferred_fish, preferred_fishing, preferred_locate, preferred_month, preferred_hour):
-    file_path = os.path.join(settings.BASE_DIR, 'static', '갈치_output.xlsx')
+    file_path = os.path.join(settings.BASE_DIR, 'static', '포인트_추천_데이터.xlsx')
     blog_data = pd.read_excel(file_path)
     matched_points = []
 
@@ -50,7 +52,7 @@ def find_recommendation_point(preferred_fish, preferred_fishing, preferred_locat
             frequency += 1
         elif row['month'] == preferred_month:
             frequency += 1
-        elif row['time'] == preferred_hour:
+        elif row['hour'] == preferred_hour:
             frequency += 1
 
         matched_points.append((row['point'], frequency))
@@ -60,7 +62,7 @@ def find_recommendation_point(preferred_fish, preferred_fishing, preferred_locat
         max_frequency = max(matched_points, key=lambda x: x[1])[1]
         highest_frequency_points = [point[0] for point in matched_points if point[1] == max_frequency]
 
-        priority = ['fish', 'locate', 'fishing', 'month', 'time']
+        priority = ['fish', 'locate', 'fishing', 'month', 'hour']
         recommended_point = None
 
         for point in highest_frequency_points:
@@ -90,7 +92,64 @@ def point_recommendation_result(request, *args, **kwargs):
         'red_snapper': '참돔',
         'rockfish': '우럭',
         'flatfish': '광어',
-        'no_matter': '상관 없음',
+        'no_matter': '상관없음',
+    }
+    locate_mapping = {
+        'south_west': '남해서부',
+        'south_central': '남해중부',
+        'south_east': '남해동부',
+        'east_south': '동해남부',
+        'east_north': '동해북부',
+        'west_north': '서해북부',
+        'west_south': '서해남부',
+        'no_matter': '상관없음',
+    }
+    hour_mapping = {
+        '6to12': '오전6시~정오12시',
+        '12to18': '정오12시~오후18시',
+        '18to21': '오후18시~자정12시',
+        '0to6': '자정12시~오전6시',
+        'no_matter': '상관없음',
+    }
+    month_mapping = {
+        '1': '1월',
+        '2': '2월',
+        '3': '3월',
+        '4': '4월',
+        '5': '5월',
+        '6': '6월',
+        '7': '7월',
+        '8': '8월',
+        '9': '9월',
+        '10': '10월',
+        '11': '11월',
+        '12': '12월',
+        'no_matter': '상관없음',
+    }
+    fishing_mapping = {
+        'float': '찌낚시',
+        'one-two': '원투낚시',
+        'lure': '루어낚시',
+        'boat': '선상낚시',
+        'no_matter': '상관없음',
+    }
+
+    preferred_fish = fish_mapping.get(submission.fish, submission.fish)
+    preferred_locate = locate_mapping.get(submission.locate, submission.locate)
+    preferred_hour = hour_mapping.get(submission.hour, submission.hour)
+    preferred_month = month_mapping.get(submission.month, submission.month)
+    preferred_fishing = fishing_mapping.get(submission.fishing, submission.fishing)
+
+    recommended_point = find_recommendation_point(preferred_fish, preferred_fishing, preferred_locate, preferred_hour, preferred_month)
+    
+    context = {
+        'submission':submission, 
+        'preferred_fish':preferred_fish,
+        'preferred_locate': preferred_locate,
+        'preferred_hour': preferred_hour,
+        'preferred_month': preferred_month,
+        'preferred_fishing': preferred_fishing,
+        'recommended_point': recommended_point,
     }
     locate_mapping = {
         'south_west': '남해 서부',
@@ -150,7 +209,7 @@ def point_recommendation_result(request, *args, **kwargs):
         'recommended_point': recommended_point,
         }
     return render(request, 'noviceAngler/point_recommendation_result.html', context)
-  
+
 def fish_information(request, pk, *args, **kwargs):
     fish = Fish.objects.get(id=pk)
     return render(request, 'noviceAngler/fish_information.html', {'fish': fish})
@@ -232,7 +291,7 @@ def comment_modify(request, comment_id):
             comment = form.save(commit=False)
             comment.modify_date = timezone.now()
             comment.save()
-            return redirect('noviceAngler:detail', question_id=comment.question.id)
+            return redirect('noviceAngler:detail', article_id=comment.article.id)
     else:
         form = CommentForm(instance=comment)
     context = {'comment': comment, 'form': form}
