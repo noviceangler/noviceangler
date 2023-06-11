@@ -4,7 +4,7 @@
 <main class="point_rc_question_main">
   <h1>낚시 포인트 추천</h1>
   <p>다음 질문에 대해 답변해주세요.</p>
-  <form  action="{% url 'noviceAngler:point_result' %}" method="post" class="questions">
+  <form  action="{% url 'noviceAngler:point_recommendation_question' %}" method="post" class="questions">
     {% csrf_token %}
     <div class="qeustion long">
       <div class="question_box">선호하는 어종이 있으신가요?</div>
@@ -21,14 +21,14 @@
     <div class="question">
       <div class="question_box">낚시를 원하는 위치는 어디신가요?</div>
       <div class="checkbox">
-        <input type='radio' name='place' value='south_west' />남해 서부
-        <input type='radio' name='place' value='south_central' />남해 중부
-        <input type='radio' name='place' value='south_east' />남해 동부
-        <input type='radio' name='place' value='east_south' />동해 남부
-        <input type='radio' name='place' value='east_north' />동해 북부
-        <input type='radio' name='place' value='west_north' />서해 북부
-        <input type='radio' name='place' value='west_south' />서해 남부
-        <input type='radio' name='place' value='no_matter' />상관 없음
+        <input type='radio' name='locate' value='south_west' />남해 서부
+        <input type='radio' name='locate' value='south_central' />남해 중부
+        <input type='radio' name='locate' value='south_east' />남해 동부
+        <input type='radio' name='locate' value='east_south' />동해 남부
+        <input type='radio' name='locate' value='east_north' />동해 북부
+        <input type='radio' name='locate' value='west_north' />서해 북부
+        <input type='radio' name='locate' value='west_south' />서해 남부
+        <input type='radio' name='locate' value='no_matter' />상관 없음
       </div>
     </div>
     <div class="question">
@@ -62,10 +62,11 @@
     <div class="question">
       <div class="question_box">낚시할 때 선호하는 방식이 있으신가요?</div>
       <div class="checkbox">
-        <input type='radio' name='way' value='float' />찌낚시
-        <input type='radio' name='way' value='ont-two' />원투낚시
-        <input type='radio' name='way' value='lure' />루어낚시
-        <input type='radio' name='way' value='no_matter' />상관 없음
+        <input type='radio' name='fishing' value='float' />찌낚시
+        <input type='radio' name='fishing' value='one-two' />원투낚시
+        <input type='radio' name='fishing' value='lure' />루어낚시
+        <input type='radio' name='fishing' value='boat' />선상낚시
+        <input type='radio' name='fishing' value='no_matter' />상관 없음
         <input type='submit'>
       </div>
     </div>

@@ -57,11 +57,11 @@
 .title {
   font-weight: 700;
   font-size: 32px;
+  margin-bottom: 0;
 }
 .normal_text {
   font-size: 20px;
 }
 .notice_detail {
   font-size: 20px;
-  list-style: disc;
 }

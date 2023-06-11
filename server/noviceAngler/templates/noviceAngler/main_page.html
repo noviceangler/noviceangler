@@ -1,5 +1,19 @@
 {% extends 'noviceAngler/base.html' %}
-
+{% load static %}
 {% block content %}
-<div>hello world</div>
+<main class="main">
+  <div class="main_image">
+    <img src="{% static 'images/logo_big.png' %}" alt="">
+  </div>
+  <div class="main_textbox">
+    <p class="main_title_sub">낚시 초보를 위한</p>
+    <h1 class="main_title">제공 기능</h1><br>
+    <p class="main_text">낚시 포인트 추천</p>
+    <p class="main_text_sub">원하는 조건의 낚시 포인트를 추천해드려요.</p>
+    <p class="main_text">물고기 찾기</p>
+    <p class="main_text_sub">낚은 물고기의 종류를 알려드려요.</p>
+    <p class="main_text">커뮤니티</p>
+    <p class="main_text_sub">낚시를 좋아하는 다른 사람과 이야기를 나누어보세요!</p>
+  </div>
+</main>
 {% endblock %}

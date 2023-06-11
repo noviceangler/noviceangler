@@ -20,7 +20,7 @@ ul {
   margin: 0;
 }
 a {
-  text-decoration: none;
+  text-decoration: none  !important;
 }
 a:visited {
   color: #486284;
@@ -36,13 +36,17 @@ a:hover {
 .logo > a {
   height: 31px;
 }
-
+.menu {
+  display: flex;
+  align-items: center;
+}
 .menu > ul {
   display: flex;
   align-items: center;
   height: 100%;
   width: 500px;
   justify-content: space-between;
+  margin-bottom: 0;
 }
 .footer {
   position: fixed;
