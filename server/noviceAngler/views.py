@@ -202,14 +202,14 @@ def comment_modify(request, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id)
     if request.user != comment.author:
         messages.error(request, '수정권한이 없습니다')
-        return redirect('noviceAngler:detail', question_id=comment.question.id)
+        return redirect('noviceAngler:detail', article_id=comment.article.id)
     if request.method == "POST":
         form = CommentForm(request.POST, instance=comment)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.modify_date = timezone.now()
             comment.save()
-            return redirect('noviceAngler:detail', question_id=comment.question.id)
+            return redirect('noviceAngler:detail', article_id=comment.article.id)
     else:
         form = CommentForm(instance=comment)
     context = {'comment': comment, 'form': form}
