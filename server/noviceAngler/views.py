@@ -36,7 +36,7 @@ def point_recommendation_question(request, *args, **kwargs):
 
 # 낚시 포인트 추천 코드
 def find_recommendation_point(preferred_fish, preferred_fishing, preferred_locate, preferred_month, preferred_hour):
-    file_path = os.path.join(settings.BASE_DIR, 'static', '포인트_추천_.xlsx')
+    file_path = os.path.join(settings.BASE_DIR, 'static', 'point_recommendation_data.xlsx')
     blog_data = pd.read_excel(file_path)
     matched_points = []
 
