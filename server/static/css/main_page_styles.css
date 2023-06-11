@@ -1,0 +1,38 @@
+.main {
+    position: absolute;
+    top: 70px;
+    bottom: 100px;
+    width: 100%;
+    padding: 0 250px;
+    display: flex;
+    align-items: center;
+  }
+
+.main_image {
+    width: 455px;
+    height: 455px;
+    margin-right: 50px;
+  }
+
+.main_title {
+    font-size: 60px;
+    margin: 0.5rem 0;
+  }
+
+.main_title_sub {
+    font-size: 25px;
+    margin: 0.5rem 0;
+  }
+
+.main_text {
+    font-size: 20px;
+    margin: 0.5rem 0;
+}
+
+.main_textbox {
+    color: #486284;
+}
+
+.main_text_sub{
+    color: #8CA2C0;
+}

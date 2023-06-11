@@ -1,0 +1,75 @@
+{% extends 'noviceAngler/base.html' %}
+{% load static %}
+{% block content %}
+<main class="point_rc_question_main">
+  <h1>낚시 포인트 추천</h1>
+  <p>다음 질문에 대해 답변해주세요.</p>
+  <form  action="{% url 'noviceAngler:point_recommendation_question' %}" method="post" class="questions">
+    {% csrf_token %}
+    <div class="qeustion long">
+      <div class="question_box">선호하는 어종이 있으신가요?</div>
+      <div  class="checkbox">
+        <input type='radio' name='fish' value='hairtail' />갈치
+        <input type='radio' name='fish' value='mackerel' />고등어
+        <input type='radio' name='fish' value='mullet' />숭어
+        <input type='radio' name='fish' value='red_snapper' />참돔
+        <input type='radio' name='fish' value='rockfish' />우럭
+        <input type='radio' name='fish' value='flatfish' />광어
+        <input type='radio' name='fish' value='no_matter' />상관 없음
+      </div>
+    </div>
+    <div class="question">
+      <div class="question_box">낚시를 원하는 위치는 어디신가요?</div>
+      <div class="checkbox">
+        <input type='radio' name='locate' value='south_west' />남해 서부
+        <input type='radio' name='locate' value='south_central' />남해 중부
+        <input type='radio' name='locate' value='south_east' />남해 동부
+        <input type='radio' name='locate' value='east_south' />동해 남부
+        <input type='radio' name='locate' value='east_north' />동해 북부
+        <input type='radio' name='locate' value='west_north' />서해 북부
+        <input type='radio' name='locate' value='west_south' />서해 남부
+        <input type='radio' name='locate' value='no_matter' />상관 없음
+      </div>
+    </div>
+    <div class="question">
+      <div class="question_box">낚시할 때 선호하는 시간이 있으신가요?</div>
+      <div class="checkbox">
+        <input type='radio' name='hour' value='6to12' />오전 6시 ~ 정오 12시
+        <input type='radio' name='hour' value='12to18' />정오 12시 ~ 오후 18시
+        <input type='radio' name='hour' value='18to21' />오후 18시 ~ 자정 12시
+        <input type='radio' name='hour' value='0to6' />자정 12시 ~ 오전 6시
+        <input type='radio' name='hour' value='no_matter' />상관 없음
+      </div>
+    </div>
+    <div class="question">
+      <div class="question_box">낚시를 원하는 날짜는 언제이신가요?</div>
+      <div class="checkbox">
+        <input type='radio' name='month' value='1' />1월
+        <input type='radio' name='month' value='2' />2월
+        <input type='radio' name='month' value='3' />3월
+        <input type='radio' name='month' value='4' />4월
+        <input type='radio' name='month' value='5' />5월
+        <input type='radio' name='month' value='6' />6월
+        <input type='radio' name='month' value='7' />7월
+        <input type='radio' name='month' value='8' />8월
+        <input type='radio' name='month' value='9' />9월
+        <input type='radio' name='month' value='10' />10월
+        <input type='radio' name='month' value='11' />11월
+        <input type='radio' name='month' value='12' />12월
+        <input type='radio' name='month' value='no_matter' />상관 없음
+      </div>
+    </div>
+    <div class="question">
+      <div class="question_box">낚시할 때 선호하는 방식이 있으신가요?</div>
+      <div class="checkbox">
+        <input type='radio' name='fishing' value='float' />찌낚시
+        <input type='radio' name='fishing' value='one-two' />원투낚시
+        <input type='radio' name='fishing' value='lure' />루어낚시
+        <input type='radio' name='fishing' value='boat' />선상낚시
+        <input type='radio' name='fishing' value='no_matter' />상관 없음
+        <input type='submit'>
+      </div>
+    </div>
+  </form>
+</main>
+{% endblock %}

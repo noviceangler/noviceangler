@@ -1,0 +1,26 @@
+{% extends 'noviceAngler/base.html' %}
+{% load static %}
+{% block content %}
+<main class="rc_result_main">
+  <div>
+    {% if submission %}
+        <div class = "user_submission_box">
+            <p><span>선호 어종: {{ preferred_fish }}</span></p>
+            <p><span>선호 위치: {{ preferred_locate }}</span></p>
+            <p><span>선호 시간: {{ preferred_hour }}</span></p>
+            <p><span>선호 날짜: {{ preferred_month }}</span></p>
+            <p><span>선호 방식: {{ preferred_fishing }}</span></p>
+        </div>
+    {% else %}
+        <p>사용자 제출 데이터가 없습니다</p>
+    {% endif %}
+  </div>
+  {% if recommended_point %}
+    <br>
+    <p>이를 고려한 낚시 포인트는</p>
+    <p> {{ recommended_point }} </p>
+  {% else %}
+    <p>해당하는 추천 낚시 포인트가 없습니다.</p>
+  {% endif %}
+</main>
+{% endblock %}

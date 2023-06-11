@@ -1,0 +1,25 @@
+.point_rc_question_main {
+    padding: 0 150px;
+  }
+  .questions {
+    padding: 100px;
+  }
+  .question {
+    width: 400px;
+  }
+  .question.long {
+    width: 1000px;
+  }
+  .question_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    border-radius: 20px;
+    background-color: #DEE5ED;
+    color: #486284;
+  }
+  
+  .checkbox {
+    text-align: center;
+  }
