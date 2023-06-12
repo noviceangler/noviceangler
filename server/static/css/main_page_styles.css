@@ -1,11 +1,9 @@
 .main {
-    position: absolute;
-    top: 70px;
-    bottom: 100px;
-    width: 100%;
-    padding: 0 250px;
-    display: flex;
-    align-items: center;
+  width: 100%;
+  height: calc(100vh - 170px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   }
 
 .main_image {

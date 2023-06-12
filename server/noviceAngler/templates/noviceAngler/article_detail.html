@@ -49,7 +49,7 @@
                     <div>{{ comment.create_date }}</div>
                 </div>
             </div>
-            <div class="my-3">
+            <div class="my-1">
                 {% if request.user == comment.author %}
                 <a href="{% url 'noviceAngler:comment_modify' comment.id %}" class="btn btn-sm btn-outline-secondary">수정</a>
                 <a href="#" class="delete btn btn-sm btn-outline-secondary " data-uri="{% url 'noviceAngler:comment_delete' comment.id  %}">삭제</a>

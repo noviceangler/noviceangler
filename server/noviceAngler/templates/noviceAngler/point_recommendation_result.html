@@ -22,21 +22,7 @@
   {% else %}
     <p>해당하는 추천 낚시 포인트가 없습니다.</p>
   {% endif %}
-  <div>
-    <div class="title_text"><img src="{% static 'images/fish.png' %}" alt="">주로 잡히는 물고기</div>
-    <div class="result_information">
-      <a href="{% url 'noviceAngler:fish_information' %}" class="result_image">
-        <img src="{% static 'images/fish.png' %}" alt="결과 물고기 이미지">
-        <div>참돔</div>
-      </a>
-      <div>
-        <p class="title_text">방생 사이즈 24cm 이하</p>
-        <p class="small_text">! 물고기 체장 재는 방법</p>
-        <p class="small_text">:입을 다물게 한 상태에서 입부터 꼬리까지의 길이를 측정한다.</p>
-        <p class="more_text"><i class="far fa-hand-point-up"></i> 해당 물고기의 더 많은 정보가 궁금하면 클릭하기</p>
-      </div>
-    </div>
-  </div>
+  
   <div class="research">
     <div>결과가 마음에 드시나요?</div>
     <a class="research_btn" href="{% url 'noviceAngler:point_recommendation_question'%}">다시 검색하기</a>

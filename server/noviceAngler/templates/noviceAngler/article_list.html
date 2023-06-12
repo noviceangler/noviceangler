@@ -1,7 +1,7 @@
 {% extends 'noviceAngler/base.html' %}
 {% load article_filter %}
 {% block content %}
-<div class="container my-3">
+<div class="container my-3 overflow-auto">
     <div class="row my-3">
         <div class="col-6">
             <a href="{% url 'noviceAngler:article_create' %}" class="btn btn-primary">게시글 쓰기</a>

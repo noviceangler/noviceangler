@@ -84,7 +84,6 @@ def find_recommendation_point(preferred_fish, preferred_fishing, preferred_locat
 def point_recommendation_result(request, *args, **kwargs):
     submission_id = request.session.get('submission_id')
     submission = UserSubmission.objects.get(id=submission_id) if submission_id else None
-
     fish_mapping = {
         'hairtail': '갈치',
         'mackerel': '고등어',
@@ -150,63 +149,6 @@ def point_recommendation_result(request, *args, **kwargs):
         'preferred_month': preferred_month,
         'preferred_fishing': preferred_fishing,
         'recommended_point': recommended_point,
-    }
-    locate_mapping = {
-        'south_west': '남해 서부',
-        'south_central': '남해 중부',
-        'south_east': '남해 동부',
-        'east_south': '동해 남부',
-        'east_north': '동해 북부',
-        'west_north': '서해 북부',
-        'west_south': '서해 남부',
-        'no_matter': '상관 없음',
-    }
-    hour_mapping = {
-        '6to12': '오전 6시 ~ 정오 12시',
-        '12to18': '정오 12시 ~ 오후 18시',
-        '18to21': '오후 18시 ~ 자정 12시',
-        '0to6': '자정 12시 ~ 오전 6시',
-        'no_matter': '상관 없음',
-    }
-    month_mapping = {
-        '1': '1월',
-        '2': '2월',
-        '3': '3월',
-        '4': '4월',
-        '5': '5월',
-        '6': '6월',
-        '7': '7월',
-        '8': '8월',
-        '9': '9월',
-        '10': '10월',
-        '11': '11월',
-        '12': '12월',
-        'no_matter': '상관 없음',
-    }
-    fishing_mapping = {
-        'float': '찌낚시',
-        'one-two': '원투낚시',
-        'lure': '루어낚시',
-        'boat': '선상낚시',
-        'no_matter': '상관 없음',
-    }
-
-    preferred_fish = fish_mapping.get(submission.fish, submission.fish)
-    preferred_locate = locate_mapping.get(submission.locate, submission.locate)
-    preferred_hour = hour_mapping.get(submission.hour, submission.hour)
-    preferred_month = month_mapping.get(submission.month, submission.month)
-    preferred_fishing = fishing_mapping.get(submission.fishing, submission.fishing)
-
-    recommended_point = find_recommendation_point(preferred_fish, preferred_fishing, preferred_locate, preferred_hour, preferred_month)
-    
-    context = {
-        'submission':submission, 
-        'preferred_fish':preferred_fish,
-        'preferred_locate': preferred_locate,
-        'preferred_hour': preferred_hour,
-        'preferred_month': preferred_month,
-        'preferred_fishing': preferred_fishing,
-        'recommended_point': recommended_point,
         }
     return render(request, 'noviceAngler/point_recommendation_result.html', context)
 
@@ -217,37 +159,26 @@ def fish_information(request, pk, *args, **kwargs):
 def find_fish_page(request, *args, **kwargs):
     return render(request, 'noviceAngler/find_fish.html')
 # def find_fish(request):
-    if request.method == "POST":
-        model = load_model()
-        uploaded_image = request.FILES.get('photo')
-        if uploaded_image:
-            image = Image.open(uploaded_image)
-            preprocessed_image = image_processing(image)
-            prediction = model.predict(preprocessed_image)
-            predicted_class_index = np.argmax(prediction)
-            fish_classes = ['갈치', '고등어', '숭어', '광어', '우럭', '참돔']
-            predicted_class = fish_classes[predicted_class_index]
-
-            return render(request, "noviceAngler/fish_information.html", {'fish': predicted_class})
-    
-    return render(request, "noviceAngler/fish_information.html")
-def find_fish(request):
-    predicted_class = None
-    print(request.method, request.FILES['photo'])
-    if request.method == "POST" and request.FILES['photo']:
-        model = load_model()
-        uploaded_image = request.FILES['photo']
-        img = Image.open(uploaded_image)
-        img = img.resize((100, 100))
-        img = np.array(img)
-        img = img / 255.0
-        img = np.expand_dims(img, axis=0)
-        prediction = model.predict(img)
-        predicted_class_index = np.argmax(prediction)
-        fish_classes = ['갈치', '고등어', '숭어', '광어', '우럭', '참돔']
-        predicted_class = fish_classes[predicted_class_index]
-    return render(request, "noviceAngler/fish_information.html", {'fish': predicted_class})
+#     predicted_class = None
+#     print(request.method, request.FILES['photo'])
+#     if request.method == "POST" and request.FILES['photo']:
+#         model = load_model()
+#         uploaded_image = request.FILES['photo']
+#         img = Image.open(uploaded_image)
+#         img = img.resize((100, 100))
+#         img = np.array(img)
+#         img = img / 255.0
+#         img = np.expand_dims(img, axis=0)
+#         prediction = model.predict(img)
+#         predicted_class_index = np.argmax(prediction)
+#         fish_classes = ['갈치', '고등어', '숭어', '광어', '우럭', '참돔']
+#         predicted_class = fish_classes[predicted_class_index]
+#     return render(request, "noviceAngler/fish_information.html", {'fish': predicted_class})
         
+def find_fish(request):
+    if request.method == 'POST':
+        fish = Fish.objects.get(fish_name='고등어')
+        return render(request, "noviceAngler/fish_information.html", {'fish': fish})
 
 # 게시판
 def community(request):
